@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
+import PropTypes from "prop-types";
 import {Form, Button} from 'semantic-ui-react'
-import validator from 'validator'
+import Validator from 'validator'
+import InlineErrors from '../messages/InlineError'
 
 export default class LoginForm extends Component {
     state= {
         data:{
-        emai:"",
+        email:"",
         password:"",
         },
         loading:false,
-        erorr:{}
-      
+        error:{}
+
     }
 
     onChange = (e) => {
@@ -22,53 +24,52 @@ export default class LoginForm extends Component {
 
 onSubmit = () => {
      const error = this.validate(this.state.data);
-     this.setState ( {
-         error
-     });
+     this.setState({ error });
+
 };
 
-validate = (data) => {
+validate = data => {
     const error = {};
-if(!validator.isEmail(data.emai)) error.email = "can't be invalid"
- if(!data.password) error.password ="can't be blink";
+    if (!Validator.isEmail(data.email)) error.email = "Invalid email";
+    if (!data.password) error.password = "Can't be blank";
     return error;
-}
+  };
 
 
 
   render() {
-      const {data} = this.state;
+    const { data, error} = this.state;
     return (
       <div>
         <Form onSubmit={this.onSubmit}>
         <Form.Field>
         <label htmlfor="email"> Email</label>
-        <input 
+        <input
         type="email"
         id="email"
         name="email"
         placeholder="example@gmail.com"
         value={data.email}
-        onChange={this.onChange}
-        >
-         </input>
+        onChange={this.onChange}/>
+{error.email && <InlineErrors text={error.email} />}
         </Form.Field>
 
         <Form.Field>
         <label htmlfor="Password"> Password</label>
-        <input 
+        <input
         type="password"
         id="password"
         name="password"
         placeholder="password"
         value={data.password}
         onChange={this.onChange}
-        >
-         </input>
+        />
+        {error.password && <InlineErrors text={error.password} />}
+
         </Form.Field>
           <Button className="primary">Login</Button>
         </Form>
-        
+
       </div>
     )
   }
