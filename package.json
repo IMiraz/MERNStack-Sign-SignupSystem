@@ -1,11 +1,12 @@
 {
-  "name": "bookworm-reack",
+  "name": "bookworm-react2",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "lint": "^1.1.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4"
   },
   "scripts": {
@@ -17,7 +18,7 @@
   },
   "devDependencies": {
     "eslint": "^5.3.0",
-    "eslint-config-airbnb": "^15.1.0",
+    "eslint-config-airbnb": "^15.0.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
