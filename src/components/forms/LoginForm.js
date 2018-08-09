@@ -4,7 +4,7 @@ import {Form, Button} from 'semantic-ui-react'
 import Validator from 'validator'
 import InlineErrors from '../messages/InlineError'
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
     state= {
         data:{
         email:"",
@@ -26,6 +26,10 @@ onSubmit = () => {
      const error = this.validate(this.state.data);
      this.setState({ error });
 
+if(Object.keys(error).length === 0) {
+ this.props.submit(this.state.data);
+}
+
 };
 
 validate = data => {
@@ -42,7 +46,7 @@ validate = data => {
     return (
       <div>
         <Form onSubmit={this.onSubmit}>
-        <Form.Field>
+        <Form.Field  error={error.email} >
         <label htmlfor="email"> Email</label>
         <input
         type="email"
@@ -54,8 +58,8 @@ validate = data => {
 {error.email && <InlineErrors text={error.email} />}
         </Form.Field>
 
-        <Form.Field>
-        <label htmlfor="Password"> Password</label>
+        <Form.Field error={error.password}>
+        <label htmlFor="Password"> Password</label>
         <input
         type="password"
         id="password"
@@ -73,5 +77,11 @@ validate = data => {
       </div>
     )
   }
+
 }
+LoginForm.PropTypes = {
+    submit:PropTypes.func.isRequired
+  }
+
+export default LoginForm;
 
