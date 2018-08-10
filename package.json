@@ -14,7 +14,8 @@
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.3.3",
     "semantic-ui-react": "^0.82.2",
-    "validator": "^10.5.0"
+    "validator": "^10.5.0",
+    "redux-devtools-extension": "^2.13.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -32,5 +33,6 @@
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.10.0",
     "prettier": "^1.14.2"
+
   }
 }
