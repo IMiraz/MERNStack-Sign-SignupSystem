@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from "prop-types";
-import {Form, Button} from 'semantic-ui-react'
+import {Form, Button, Message} from 'semantic-ui-react'
 import Validator from 'validator'
 import InlineErrors from '../messages/InlineError'
 
@@ -27,7 +27,10 @@ onSubmit = () => {
      this.setState({ error });
 
 if(Object.keys(error).length === 0) {
- this.props.submit(this.state.data);
+ this.props.submit(this.state.data)
+ .catch(err =>this.setState({
+  errors:err.response.data.error
+ }))
 }
 
 };
@@ -46,6 +49,15 @@ validate = data => {
     return (
       <div>
         <Form onSubmit={this.onSubmit}>
+{errors.global && <Message negative>
+<Message.Header>
+Something Went Wrong
+</Message.Header>
+<p>
+{error.global}
+</p>
+
+</Message>}
         <Form.Field  error={error.email} >
         <label htmlfor="email"> Email</label>
         <input
