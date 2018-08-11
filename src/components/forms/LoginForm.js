@@ -27,10 +27,11 @@ onSubmit = () => {
      this.setState({ error });
 
 if(Object.keys(error).length === 0) {
+ this.setState({ loading:true})
  this.props.submit(this.state.data)
  .catch(err =>this.setState({
 
-  error:err.response.data.error
+  error:err.response.data.error,loader:false
  }))
 }
 
@@ -49,7 +50,7 @@ validate = data => {
     const { data, error} = this.state;
     return (
       <div>
-        <Form onSubmit={this.onSubmit}>
+        <Form onSubmit={this.onSubmit} loading={this.state.loading}>
 {error.global && <Message negative>
 <Message.Header>
 Something Went Wrong
