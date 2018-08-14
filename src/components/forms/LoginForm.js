@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from "prop-types";
+import propTypes  from "prop-types";
 import {Form, Button, Message} from 'semantic-ui-react'
 import Validator from 'validator'
 import InlineErrors from '../messages/InlineError'
@@ -22,29 +22,27 @@ class LoginForm extends Component {
     }
 
 
-onSubmit = () => {
-     const error = this.validate(this.state.data);
-     this.setState({ error });
+    onSubmit = () => {
+      const error = this.validate(this.state.data);
+      this.setState({ error });
+      if (Object.keys(error).length === 0) {
+        this.setState({ loading: true });
+        this.props.submit(this.state.data)
+          .catch(err =>
+            this.setState({
+              error: err.response.data.error,  loading: false })
+          );
 
-if(Object.keys(error).length === 0) {
- this.setState({ loading:true})
- this.props.submit(this.state.data)
- .catch(err =>this.setState({
+      }
 
-  error:err.response.data.error,loader:false
- }))
-}
+    };
 
-};
-
-validate = data => {
-    const error = {};
-    if (!Validator.isEmail(data.email)) error.email = "Invalid email";
-    if (!data.password) error.password = "Can't be blank";
-    return error;
-  };
-
-
+    validate = data => {
+      const error= {};
+      if (!Validator.isEmail(data.email)) error.email = "Invalid email";
+      if (!data.password) error.password = "Can't be blank";
+      return error;
+    };
 
   render() {
     const { data, error} = this.state;
@@ -61,7 +59,7 @@ Something Went Wrong
 
 </Message>}
         <Form.Field  error={error.email} >
-        <label htmlfor="email"> Email</label>
+        <label htmlFor="email"> Email</label>
         <input
         type="email"
         id="email"
@@ -93,8 +91,8 @@ Something Went Wrong
   }
 
 }
-LoginForm.PropTypes = {
-    submit:PropTypes.func.isRequired
+LoginForm.propTypes  = {
+    submit:propTypes.func.isRequired
   }
 
 export default LoginForm;
