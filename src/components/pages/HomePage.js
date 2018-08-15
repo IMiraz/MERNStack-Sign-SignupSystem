@@ -3,19 +3,20 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import propTypes from 'prop-types'
 import {Button} from 'semantic-ui-react'
+import * as action from '../action/auth'
 
 
-const Homepage = ({isAuthenticated}) => (
+const Homepage = ({isAuthenticated, logout}) => (
     <div>
  <h1>home page welcome</h1>
 
-{isAuthenticated?  <Button content="Logout"/>:<Link to="/login">Login</Link>}</div>
+{isAuthenticated?  <Button content="Logout" onClick={() => logout()  } />:<Link to="/login">Login</Link>}</div>
 
 );
 
 Homepage.propTypes = {
-
-    isAuthenticated:propTypes.bool.isRequired
+    isAuthenticated:propTypes.bool.isRequired,
+    logout:propTypes.func.isRequired
 
 }
 function mapStateToProps(state){
@@ -25,4 +26,4 @@ return {
 };
 }
 
-export default connect(mapStateToProps) (Homepage);
+export default connect(mapStateToProps, {logout: action.logout}) (Homepage);
