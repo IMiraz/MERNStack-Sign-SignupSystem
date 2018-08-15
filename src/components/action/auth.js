@@ -9,6 +9,6 @@ export const userLoggedIn = user => ({
 
 export const login = credentials => dispatch =>
   api.user.login(credentials).then(user => {
- localStorage.bookwormJWT=user.token;
+ localStorage.loginJWT=user.token;
     dispatch(userLoggedIn(user));
   });
