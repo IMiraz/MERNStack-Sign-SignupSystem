@@ -12,8 +12,15 @@ import validator from 'validator'
      },
   loading:false,
   error:{}
-
  }
+onChange = (e) =>{
+    this.setState({
+data:{...this.state.data,
+     [e.target.name]:e.target.value}
+    })
+
+}
+
 
 
   render() {
