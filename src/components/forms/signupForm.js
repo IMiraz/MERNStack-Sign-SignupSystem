@@ -21,6 +21,21 @@ data:{...this.state.data,
 
 }
 
+onSubmit = () => {
+    const error = this.validate(this.state.data);
+    this.setState({error});
+    if(Object.keys(error).length===0) {
+   this.setState({loading:true});
+this.props.submit(this.state.data)
+ .catch(err => this. setState({
+      error:err.response.data.error,
+      loading:false
+ })
+);
+    }
+
+};
+
 
 
   render() {
