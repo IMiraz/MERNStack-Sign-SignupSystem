@@ -11,11 +11,22 @@ export const userLoggedIn = user => ({
     type: USER_LOGGED_OUT,
   });
 
+  //Login auth
+
 export const login = credentials => dispatch =>
   api.user.login(credentials).then(user => {
  localStorage.loginJWT=user.token;
     dispatch(userLoggedIn(user));
   });
+
+
+  export const signup = data => dispatch =>
+  api.user.losignupgin(data)
+  .then(user => {
+ localStorage.loginJWT=user.token;
+    dispatch(userLoggedIn(user));
+  });
+
 
   export const logout = () => dispatch =>
   {

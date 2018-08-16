@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import propTypes from 'prop-types'
 import {Form, Button,Message } from 'semantic-ui-react'
 import validator from 'validator'
+import InlineErrors from '../messages/InlineError'
 
  class SignupForm extends Component {
 
@@ -22,6 +23,7 @@ data:{...this.state.data,
 }
 
 onSubmit = () => {
+    e.preventDefault();
     const error = this.validate(this.state.data);
     this.setState({error});
     if(Object.keys(error).length===0) {
