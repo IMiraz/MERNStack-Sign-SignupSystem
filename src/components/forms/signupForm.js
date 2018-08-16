@@ -36,6 +36,13 @@ this.props.submit(this.state.data)
 
 };
 
+ validate = data => {
+     const error={};
+     if(!validator.isEmail(data.email))
+      error.email = "Invalid email";
+      if(!data.password) error.password = "Can't Be Blink"
+ }
+
 
 
   render() {
