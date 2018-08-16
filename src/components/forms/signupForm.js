@@ -40,12 +40,14 @@ this.props.submit(this.state.data)
      const error={};
      if(!validator.isEmail(data.email))
       error.email = "Invalid email";
-      if(!data.password) error.password = "Can't Be Blink"
+      if(!data.password) error.password = "Can't Be Blink";
+      return error;
  }
 
 
 
   render() {
+const {data, error} = this.state;
     return (
       <div>
  <Form onSubmit={this.onSubmit} loading={this.state.loading}>
@@ -88,6 +90,10 @@ Something Went Wrong
       </div>
     )
   }
+}
+
+SignupForm.propTypes = {
+    submit:propTypes.func.isRequired
 }
 
 export default SignupForm
