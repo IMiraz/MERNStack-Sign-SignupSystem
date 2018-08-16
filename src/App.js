@@ -15,7 +15,7 @@ const App = ({location}) => (
 <div className="ui container">
 <Route  location={location} path="/" exact component={Homepage} />
 <GuestRoute location={location} path="/login"  component={LoginPage} />
-<GuestRoute location={location} path="/"dashborad  component={SignuPage} />
+<GuestRoute location={location} path="/signup"  component={SignuPage} />
 <UserRoute location={location} path="/dashborad"  component={DashboradPage} />
 </div>
 );

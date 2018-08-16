@@ -19,6 +19,7 @@ export const login = credentials => dispatch =>
     dispatch(userLoggedIn(user));
   });
 
+  //singup auths
 
   export const signup = data => dispatch =>
   api.user.losignupgin(data)
@@ -27,7 +28,7 @@ export const login = credentials => dispatch =>
     dispatch(userLoggedIn(user));
   });
 
-
+//logout auth
   export const logout = () => dispatch =>
   {
  localStorage.removeItem('loginJWT');
