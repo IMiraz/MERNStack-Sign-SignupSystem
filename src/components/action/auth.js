@@ -21,12 +21,6 @@ export const login = credentials => dispatch =>
 
   //singup auths
 
-  export const signup = data => dispatch =>
-  api.user.losignupgin(data)
-  .then(user => {
- localStorage.loginJWT=user.token;
-    dispatch(userLoggedIn(user));
-  });
 
 //logout auth
   export const logout = () => dispatch =>

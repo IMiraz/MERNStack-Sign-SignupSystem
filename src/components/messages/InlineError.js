@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import propTypes from 'prop-types'
 
  const InlineErrors = ({text}) =>{
   return (
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
     </span>
   )
 }
-InlineErrors.PropTypes = {
-  text:PropTypes.string.isRequired
+InlineErrors.propTypes = {
+  text:propTypes.string.isRequired
 }
 export default InlineErrors

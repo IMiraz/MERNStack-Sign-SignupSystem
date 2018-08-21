@@ -11,7 +11,7 @@ class LoginForm extends Component {
         password:"",
         },
         loading:false,
-        error:{}
+        errors:{}
 
     }
 
@@ -23,14 +23,14 @@ class LoginForm extends Component {
 
 
     onSubmit = () => {
-      const error = this.validate(this.state.data);
-      this.setState({ error });
-      if (Object.keys(error).length === 0) {
+      const errors = this.validate(this.state.data);
+      this.setState({ errors });
+      if (Object.keys(errors).length === 0) {
         this.setState({ loading: true });
         this.props.submit(this.state.data)
           .catch(err =>
             this.setState({
-              error: err.response.data.error,  loading: false })
+              errors: err.response.data.errors,  loading: false })
           );
 
       }
@@ -38,27 +38,27 @@ class LoginForm extends Component {
     };
 
     validate = data => {
-      const error= {};
-      if (!Validator.isEmail(data.email)) error.email = "Invalid email";
-      if (!data.password) error.password = "Can't be blank";
-      return error;
+      const errors= {};
+      if (!Validator.isEmail(data.email)) errors.email = "Invalid email";
+      if (!data.password) errors.password = "Can't be blank";
+      return errors;
     };
 
   render() {
-    const { data, error} = this.state;
+    const { data, errors} = this.state;
     return (
       <div>
         <Form onSubmit={this.onSubmit} loading={this.state.loading}>
-{error.global && <Message negative>
+{errors.global && <Message negative>
 <Message.Header>
 Something Went Wrong
 </Message.Header>
 <p>
-{error.global}
+{errors.global}
 </p>
 
 </Message>}
-        <Form.Field  error={error.email} >
+        <Form.Field  error={errors.email} >
         <label htmlFor="email"> Email</label>
         <input
         type="email"
@@ -67,10 +67,10 @@ Something Went Wrong
         placeholder="example@gmail.com"
         value={data.email}
         onChange={this.onChange}/>
-{error.email && <InlineErrors text={error.email} />}
+{errors.email && <InlineErrors text={errors.email} />}
         </Form.Field>
 
-        <Form.Field error={error.password}>
+        <Form.Field error={errors.password}>
         <label htmlFor="Password"> Password</label>
         <input
         type="password"
@@ -80,7 +80,7 @@ Something Went Wrong
         value={data.password}
         onChange={this.onChange}
         />
-        {error.password && <InlineErrors text={error.password} />}
+        {errors.password && <InlineErrors text={errors.password} />}
 
         </Form.Field>
           <Button className="primary">Login</Button>

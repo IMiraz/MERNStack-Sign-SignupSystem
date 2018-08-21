@@ -4,7 +4,7 @@ import {Route} from 'react-router-dom'
 import Homepage from './components/pages/HomePage'
 import LoginPage from './components/pages/LoginPage'
 import DashboradPage from './components/pages/DashboardPage'
-import SignuPage from './components/pages/signupPage'
+import SignupPage from './components/pages/signupPage'
 import UserRoute from './components/Router/UserRoute'
 import GuestRoute from './components/Router/GuestRoute'
 
@@ -14,9 +14,14 @@ import GuestRoute from './components/Router/GuestRoute'
 const App = ({location}) => (
 <div className="ui container">
 <Route  location={location} path="/" exact component={Homepage} />
-<GuestRoute location={location} path="/login"  component={LoginPage} />
-<GuestRoute location={location} path="/signup"  component={SignuPage} />
-<UserRoute location={location} path="/dashborad"  component={DashboradPage} />
+<GuestRoute location={location} path="/login"  exact component={LoginPage} />
+<GuestRoute
+      location={location}
+      path="/signup"
+      exact
+      component={SignupPage}
+    />
+<UserRoute location={location} path="/dashborad" exact  component={DashboradPage} />
 </div>
 );
 App.propTypes={

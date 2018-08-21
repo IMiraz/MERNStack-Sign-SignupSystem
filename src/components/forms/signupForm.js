@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import propTypes from 'prop-types'
-import {Form, Button,Message } from 'semantic-ui-react'
+import {Form, Button} from 'semantic-ui-react'
 import validator from 'validator'
 import InlineErrors from '../messages/InlineError'
-
  class SignupForm extends Component {
 
  state = {
@@ -12,7 +11,7 @@ import InlineErrors from '../messages/InlineError'
          password:"",
      },
   loading:false,
-  error:{}
+  errors:{}
  }
 onChange = (e) =>{
     this.setState({
@@ -23,14 +22,15 @@ data:{...this.state.data,
 }
 
 onSubmit = () => {
-    e.preventDefault();
-    const error = this.validate(this.state.data);
-    this.setState({error});
-    if(Object.keys(error).length===0) {
+    // e.preventDefault();
+    const errors = this.validate(this.state.data);
+    this.setState({errors});
+    if(Object.keys(errors).length===0) {
    this.setState({loading:true});
 this.props.submit(this.state.data)
- .catch(err => this. setState({
-      error:err.response.data.error,
+
+ .catch(err => this.setState({
+      errors:err.response.data.errors,
       loading:false
  })
 );
@@ -39,30 +39,22 @@ this.props.submit(this.state.data)
 };
 
  validate = data => {
-     const error={};
+     const errors={};
      if(!validator.isEmail(data.email))
-      error.email = "Invalid email";
-      if(!data.password) error.password = "Can't Be Blink";
-      return error;
+      errors.email = "Invalid email";
+      if(!data.password) errors.password = "Can't Be Blink";
+      return errors;
  }
 
 
 
   render() {
-const {data, error} = this.state;
+const {data, errors} = this.state;
     return (
       <div>
  <Form onSubmit={this.onSubmit} loading={this.state.loading}>
-{error.global && <Message negative>
-<Message.Header>
-Something Went Wrong
-</Message.Header>
-<p>
-{error.global}
-</p>
 
-</Message>}
-        <Form.Field  error={error.email} >
+        <Form.Field  error={errors.email} >
         <label htmlFor="email"> Email</label>
         <input
         type="email"
@@ -71,10 +63,10 @@ Something Went Wrong
         placeholder="example@gmail.com"
         value={data.email}
         onChange={this.onChange}/>
-{error.email && <InlineErrors text={error.email} />}
+{errors.email && <InlineErrors text={errors.email} />}
         </Form.Field>
 
-        <Form.Field error={error.password}>
+        <Form.Field error={errors.password}>
         <label htmlFor="Password"> Password</label>
         <input
         type="password"
@@ -84,7 +76,7 @@ Something Went Wrong
         value={data.password}
         onChange={this.onChange}
         />
-        {error.password && <InlineErrors text={error.password} />}
+        {errors.password && <InlineErrors text={errors.password} />}
 
         </Form.Field>
           <Button className="primary">Signup</Button>
